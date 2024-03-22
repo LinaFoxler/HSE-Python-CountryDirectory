@@ -78,7 +78,7 @@ class CountryCollector(BaseCollector):
         """
         Чтение данных из кэша.
 
-        :return:
+        :return:  Модель страны
         """
 
         async with aiofiles.open(await cls.get_file_path(), mode="r") as file:
@@ -103,6 +103,9 @@ class CountryCollector(BaseCollector):
                         population=item["population"],
                         subregion=item["subregion"],
                         timezones=item["timezones"],
+                        area=item["area"],
+                        latitude=item["latitude"],
+                        longitude=item["longitude"],
                     )
                 )
 
@@ -204,7 +207,7 @@ class WeatherCollector(BaseCollector):
         Чтение данных из кэша.
 
         :param location:
-        :return:
+        :return: Модель погоды
         """
 
         filename = f"{location.capital}_{location.alpha2code}".lower()
@@ -219,6 +222,9 @@ class WeatherCollector(BaseCollector):
                 humidity=result["main"]["humidity"],
                 wind_speed=result["wind"]["speed"],
                 description=result["weather"][0]["description"],
+                visibility=result["visibility"],
+                dt=result["dt"],
+                timezone=result["timezone"] // 3600,
             )
 
         return None

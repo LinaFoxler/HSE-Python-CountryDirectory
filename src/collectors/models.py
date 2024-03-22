@@ -2,6 +2,7 @@
 Описание моделей данных (DTO).
 """
 
+from datetime import datetime
 from pydantic import Field, BaseModel
 
 
@@ -93,6 +94,9 @@ class CountryDTO(BaseModel):
             timezones=[
                 "UTC+02:00",
             ],
+             latitude=53.0,
+            longitude=28.0,
+            area"=207600.0
         )
     """
 
@@ -106,6 +110,9 @@ class CountryDTO(BaseModel):
     population: int
     subregion: str
     timezones: list[str]
+    area: float | None
+    latitude: float | None
+    longitude: float | None
 
 
 class CurrencyRatesDTO(BaseModel):
@@ -140,6 +147,9 @@ class WeatherInfoDTO(BaseModel):
             humidity=54,
             wind_speed=4.63,
             description="scattered clouds",
+            visibility=10000,
+            dt=datetime.datetime(2021, 9, 14, 20, 0),
+            timezone=0
         )
     """
 
@@ -148,6 +158,9 @@ class WeatherInfoDTO(BaseModel):
     humidity: int
     wind_speed: float
     description: str
+    visibility: int
+    dt: datetime
+    timezone: int
 
 
 class LocationInfoDTO(BaseModel):
